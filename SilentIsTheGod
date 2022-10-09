@@ -1,5 +1,4 @@
 
-
     if syn then 
     syn.queue_on_teleport([[
         repeat wait() until game:IsLoaded()
@@ -18,7 +17,7 @@ local module = loadstring(game:HttpGet"https://raw.githubusercontent.com/LeoKhol
         if v.Name == "TreeRegion" then
             for i,v in next,v:GetChildren() do
                 if v:FindFirstChild("TreeClass") and v.TreeClass.Value == "Spooky" then
-                    TreePos = v.WoodSection.CFrame 
+                    TreePos = v.WoodSection.CFrame
                 end;
             end;
         end;
@@ -30,16 +29,23 @@ local module = loadstring(game:HttpGet"https://raw.githubusercontent.com/LeoKhol
                 pcall(function()
                     if v:FindFirstChild("TreeClass").Value == "Spooky" or v:FindFirstChild("TreeClass").Value == "SpookyNeon" then
                         WoodType = v:FindFirstChild("TreeClass").Value
+                        SelectedTree = v
                     end;
                 end)
             end;
         end;
     end;
     
+    for i,v in next, SelectedTree:GetChildren() do
+        if v.Name == "WoodSection" then
+            Size = Size + v.Size.X * v.Size.Y * v.Size.Z
+        end
+    end
+    
     function SendToDiscord()
         local FoundTree = WoodType 
         local url = "https://discord.com/api/webhooks/1028754374572396544/AtlW6Pc5rZujnJ_PYYLKfXaSU3guroVZA0XsUjRzbC2yHqaTAOh01r9zgbw4b4nrurTp"
-        local data = {["content"] = "@Spook Ping",["embeds"] = {{["title"] = "Tree Found: Spooky",["description"] = "Tree Size: " .. math.random(100),["type"] = "rich",["color"] = tonumber(D3FFFF),["fields"] = {{["name"] = "Game Link:",["value"] = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' ..game.PlaceId .. ', "' .. game.JobId .. '", game.Players.LocalPlayer)```',["inline"] = true},{["name"] = "Teleport Script:",["value"] = "```game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new("..tostring(TreePos)..")```",["inline"] = false},{["name"] = "Console Script:",["value"] = '```Roblox.GameLauncher.joinGameInstance(' ..game.PlaceId .. ', "' .. game.JobId .. '")```',["inline"] = false},},}}}
+        local data = {["content"] = "@Spook Ping",["embeds"] = {{["title"] = "Tree Found: Spooky",["description"] = "Tree Size: " ..math.floor(Size),["type"] = "rich",["color"] = tonumber(D3FFFF),["fields"] = {{["name"] = "Game Link:",["value"] = '```game:GetService("TeleportService"):TeleportToPlaceInstance(' ..game.PlaceId .. ', "' .. game.JobId .. '", game.Players.LocalPlayer)```',["inline"] = true},{["name"] = "Teleport Script:",["value"] = "```game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new("..tostring(TreePos)..")```",["inline"] = false},{["name"] = "Console Script:",["value"] = '```Roblox.GameLauncher.joinGameInstance(' ..game.PlaceId .. ', "' .. game.JobId .. '")```',["inline"] = false},},}}}
         
         local headers = {["content-type"] = "application/json"}
         request = http_request or request or HttpPost or syn.request

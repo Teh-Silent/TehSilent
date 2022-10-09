@@ -36,9 +36,11 @@ local module = loadstring(game:HttpGet"https://raw.githubusercontent.com/LeoKhol
         end;
     end;
     
-    for i,v in next, SelectedTree:GetChildren() do
-        if v.Name == "WoodSection" then
-            Size = Size + v.Size.X * v.Size.Y * v.Size.Z
+    if SelectedTree ~= nil then
+        for i,v in next, SelectedTree:GetChildren() do
+            if v.Name == "WoodSection" then
+                Size = Size + v.Size.X * v.Size.Y * v.Size.Z
+            end
         end
     end
     

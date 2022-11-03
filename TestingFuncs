@@ -1,5 +1,9 @@
 local Funcs = {}
 
+Funcs.Silent = function()
+	print("Silent Winning")
+end
+
 Funcs.SellPlanks = function()
 	print("Sold all planks")
 end

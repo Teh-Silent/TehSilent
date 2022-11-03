@@ -1,0 +1,6 @@
+local Funcs = {}
+
+Funcs.SellPlanks = function()
+	print("Sold all planks")
+end
+return Funcs

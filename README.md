@@ -1,2 +1,0 @@
-# TehSilent
-Personal Use
